@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>动画轮播图</title>
+<script src="../jquery-3.1.1.min.js"></script>
+<style>
+*{
+	margin:0;
+	padding:0;
+	}
+div{
+	width:1400px;
+	height:490px;
+	position:relative;
+	border:1px solid #0CF;
+	}
+li{
+	list-style:none;
+	}
+
+.photo img{
+	width:1400px;
+	height:490px;
+	}
+.photo li{
+	display:none;
+	position:absolute;
+	left:0;
+	top:0;
+	}
+.bar{
+	width:900px;
+	height:10px;
+	position:absolute;
+	bottom:5px;
+	left:0;
+	right:0;
+	margin:0 auto;
+	}
+.bar li{
+	float:left;
+	width:200px;
+	height:10px;
+	background:#FFF;
+	margin:0 10px;
+	}
+.bar li p{
+	width:0;
+	height:10px;
+	background:#F00;
+	}
+</style>
+<script>
+    $(function(){
+        var Photo=$('.photo li');
+        var Bar=$('.bar li');
+        var i=0;
+
+        function autopaly(){
+            Bar.eq(i).find('p').animate({width:'100%'},2500,function(){
+                Bar.find('p').css('width','0');
+                    i++;
+                    if(i>3){
+                      i=0;
+                    }
+                });
+                Photo.eq(i).fadeIn(500).siblings().fadeOut(500);
+        }
+
+        autopaly();
+
+        setInterval(function(){
+            autopaly();
+        },3000);
+    })
+    </script>
+</head>
+
+<body>
+    <div>
+       <ul class="photo">
+          <li style="display:block;"><img src="1.jpg" alt=""/></li>
+          <li><img src="2.jpg" alt=""/></li>
+          <li><img src="3.jpg" alt=""/></li>
+          <li><img src="4.jpg" alt=""/></li>
+       </ul>
+       <ul class="bar">
+          <li><p></p></li>
+          <li><p></p></li>
+          <li><p></p></li>
+          <li><p></p></li>
+       </ul>
+    </div>
+</body>
+</html>
